@@ -81,10 +81,10 @@ export class MainPanel extends PureComponent<Props> {
             legendPosition: 'middle',
             legendOffset: -40,
           }}
-          cellOpacity={1}
+          cellOpacity={0.7}
           cellBorderColor={{ from: 'color', modifiers: [['darker', 0.4]] }}
           labelTextColor={{ from: 'color', modifiers: [['darker', 1.8]] }}
-          colors="nivo"
+          colors="blues"
           // @ts-ignore
           defs={[
             {

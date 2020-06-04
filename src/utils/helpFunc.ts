@@ -21,7 +21,7 @@ export const processData = (valueArr: number[], timestampArr: number[]) => {
   for (let i = 0; i < 7; i++) {
     hours.map(hour => {
       if (templateTable[i][hour] == 0) {
-        templateTable[i][hour] = undefined;
+        templateTable[i][hour] = null;
       } else {
         templateTable[i][hour] = Math.round(templateTable[i][hour] * 10) / 10;
       }

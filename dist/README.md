@@ -1,8 +1,6 @@
-# Simple React Panel
+# ES Table Heatmap
 
-This is just a stub to show how you can create a basic visualization plugin.
-
-First, install dependencies:
+Grafana plugin to generate Table Heatmap from Elasticsearch datasource
 
 ```BASH
 yarn install

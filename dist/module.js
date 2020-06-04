@@ -39469,7 +39469,7 @@ function (_super) {
         legendPosition: 'middle',
         legendOffset: -40
       },
-      cellOpacity: 1,
+      cellOpacity: 0.7,
       cellBorderColor: {
         from: 'color',
         modifiers: [['darker', 0.4]]
@@ -39478,7 +39478,7 @@ function (_super) {
         from: 'color',
         modifiers: [['darker', 1.8]]
       },
-      colors: "nivo",
+      colors: "blues",
       // @ts-ignore
       defs: [{
         id: 'lines',
@@ -39606,7 +39606,7 @@ var processData = function processData(valueArr, timestampArr) {
   var _loop_1 = function _loop_1(i) {
     _config_constant__WEBPACK_IMPORTED_MODULE_0__["hours"].map(function (hour) {
       if (templateTable[i][hour] == 0) {
-        templateTable[i][hour] = undefined;
+        templateTable[i][hour] = null;
       } else {
         templateTable[i][hour] = Math.round(templateTable[i][hour] * 10) / 10;
       }
