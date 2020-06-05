@@ -39396,6 +39396,11 @@ function (_super) {
 
   MainPanel.prototype.componentDidMount = function () {
     var series = this.props.data.series;
+
+    if (series.length == 0) {
+      return;
+    }
+
     var valueArray = series[0].fields[0].values.buffer.map(function (elm, i) {
       return series.reduce(function (sum, curr) {
         return sum + curr.fields[0].values.buffer[i];
@@ -39411,6 +39416,14 @@ function (_super) {
   MainPanel.prototype.componentDidUpdate = function (prevProps) {
     if (prevProps.data.series !== this.props.data.series) {
       var series_1 = this.props.data.series;
+
+      if (series_1.length == 0) {
+        this.setState({
+          data: null
+        });
+        return;
+      }
+
       var valueArray = series_1[0].fields[0].values.buffer.map(function (elm, i) {
         return series_1.reduce(function (sum, curr) {
           return sum + curr.fields[0].values.buffer[i];

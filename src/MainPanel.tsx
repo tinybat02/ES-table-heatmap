@@ -18,6 +18,10 @@ export class MainPanel extends PureComponent<Props> {
   componentDidMount() {
     const series = this.props.data.series as Frame[];
 
+    if (series.length == 0) {
+      return;
+    }
+
     const valueArray = series[0].fields[0].values.buffer.map((elm: Frame, i: number) =>
       series.reduce((sum, curr) => sum + curr.fields[0].values.buffer[i], 0)
     );
@@ -31,6 +35,10 @@ export class MainPanel extends PureComponent<Props> {
     if (prevProps.data.series !== this.props.data.series) {
       const series = this.props.data.series as Frame[];
 
+      if (series.length == 0) {
+        this.setState({ data: null });
+        return;
+      }
       const valueArray = series[0].fields[0].values.buffer.map((elm: Frame, i: number) =>
         series.reduce((sum, curr) => sum + curr.fields[0].values.buffer[i], 0)
       );
