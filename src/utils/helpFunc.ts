@@ -26,6 +26,8 @@ export const processData = (valueArr: number[], timestampArr: number[]) => {
   });
 
   const numberOfWeeks = Object.keys(totalWeeks).length;
+  console.log('weeks ', totalWeeks);
+  console.log('template ', templateTable);
   for (let i = 0; i < 6; i++) {
     hours.map(hour => {
       if (templateTable[i][hour] == 0) {
