@@ -39626,8 +39626,8 @@ var processData = function processData(valueArr, timestampArr) {
     var dayOfWeek = date.locale('en').format('ddd');
     var hour = date.format('HH');
 
-    if (!totalWeeks[date.week()]) {
-      totalWeeks[date.week()] = true;
+    if (!totalWeeks[date.isoWeek()]) {
+      totalWeeks[date.isoWeek()] = true;
     }
 
     if (dayOfWeek !== 'Sun' && _config_constant__WEBPACK_IMPORTED_MODULE_0__["hours"].includes(hour)) {

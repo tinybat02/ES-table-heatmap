@@ -16,8 +16,8 @@ export const processData = (valueArr: number[], timestampArr: number[]) => {
     const date = moment(timestamp);
     const dayOfWeek = date.locale('en').format('ddd') as DayOfWeek;
     const hour = date.format('HH');
-    if (!totalWeeks[date.week()]) {
-      totalWeeks[date.week()] = true;
+    if (!totalWeeks[date.isoWeek()]) {
+      totalWeeks[date.isoWeek()] = true;
     }
 
     if (dayOfWeek !== 'Sun' && hours.includes(hour)) {
