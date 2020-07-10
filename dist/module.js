@@ -39620,15 +39620,12 @@ var processData = function processData(valueArr, timestampArr) {
     });
     return obj;
   });
-  console.log('templateTable ', templateTable);
   timestampArr.map(function (timestamp, idx) {
     var date = moment__WEBPACK_IMPORTED_MODULE_1___default()(timestamp);
     var dayOfWeek = date.locale('en').format('ddd');
     var hour = date.format('HH');
 
     if (dayOfWeek !== 'Sun' && _config_constant__WEBPACK_IMPORTED_MODULE_0__["hours"].includes(hour)) {
-      console.log('dayOfWeek ', dayOfWeek);
-      console.log('match ', _config_constant__WEBPACK_IMPORTED_MODULE_0__["mappingWeekToArrayIndex"][dayOfWeek]);
       templateTable[_config_constant__WEBPACK_IMPORTED_MODULE_0__["mappingWeekToArrayIndex"][dayOfWeek]][hour] += valueArr[idx];
     }
   });
@@ -39643,7 +39640,7 @@ var processData = function processData(valueArr, timestampArr) {
     });
   };
 
-  for (var i = 0; i < 7; i++) {
+  for (var i = 0; i < 6; i++) {
     _loop_1(i);
   }
 
