@@ -39620,22 +39620,32 @@ var processData = function processData(valueArr, timestampArr) {
     });
     return obj;
   });
+  var totalWeeks = {};
   timestampArr.map(function (timestamp, idx) {
     var date = moment__WEBPACK_IMPORTED_MODULE_1___default()(timestamp);
     var dayOfWeek = date.locale('en').format('ddd');
     var hour = date.format('HH');
 
+    if (!totalWeeks[date.week()]) {
+      totalWeeks[date.week()] = true;
+    }
+
     if (dayOfWeek !== 'Sun' && _config_constant__WEBPACK_IMPORTED_MODULE_0__["hours"].includes(hour)) {
       templateTable[_config_constant__WEBPACK_IMPORTED_MODULE_0__["mappingWeekToArrayIndex"][dayOfWeek]][hour] += valueArr[idx];
     }
   });
+  var numberOfWeeks = Object.keys(totalWeeks).length;
 
   var _loop_1 = function _loop_1(i) {
     _config_constant__WEBPACK_IMPORTED_MODULE_0__["hours"].map(function (hour) {
       if (templateTable[i][hour] == 0) {
         templateTable[i][hour] = null;
       } else {
-        templateTable[i][hour] = Math.round(templateTable[i][hour] * 10) / 10;
+        if (numberOfWeeks > 1) {
+          templateTable[i][hour] = Math.round(templateTable[i][hour] / numberOfWeeks * 10) / 10;
+        } else {
+          templateTable[i][hour] = Math.round(templateTable[i][hour] * 10) / 10;
+        }
       }
     });
   };
