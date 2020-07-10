@@ -39605,50 +39605,57 @@ var defaults = {};
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "processData", function() { return processData; });
-/* harmony import */ var _config_constant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config/constant */ "./config/constant.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "moment");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _config_constant__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../config/constant */ "./config/constant.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "moment");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 var processData = function processData(valueArr, timestampArr) {
-  var templateTable = _config_constant__WEBPACK_IMPORTED_MODULE_0__["weekdays"].map(function (weekday) {
+  var keepTrackWeek = [];
+  var templateTable = _config_constant__WEBPACK_IMPORTED_MODULE_1__["weekdays"].map(function (weekday) {
     var obj = {
       date: weekday
     };
-    _config_constant__WEBPACK_IMPORTED_MODULE_0__["hours"].map(function (hour) {
+    _config_constant__WEBPACK_IMPORTED_MODULE_1__["hours"].map(function (hour) {
       obj[hour] = 0;
     });
+
+    var date = obj.date,
+        rest = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__rest"])(obj, ["date"]);
+
+    keepTrackWeek.push(rest);
     return obj;
-  });
-  var totalWeeks = {};
+  }); // const totalWeeks: { [key: number]: boolean } = {};
+
   timestampArr.map(function (timestamp, idx) {
-    var date = moment__WEBPACK_IMPORTED_MODULE_1___default()(timestamp);
+    var date = moment__WEBPACK_IMPORTED_MODULE_2___default()(timestamp);
     var dayOfWeek = date.locale('en').format('ddd');
-    var hour = date.format('HH');
+    var hour = date.format('HH'); // if (!totalWeeks[date.isoWeek()]) {
+    //   totalWeeks[date.isoWeek()] = true;
+    // }
 
-    if (!totalWeeks[date.isoWeek()]) {
-      totalWeeks[date.isoWeek()] = true;
-    }
-
-    if (dayOfWeek !== 'Sun' && _config_constant__WEBPACK_IMPORTED_MODULE_0__["hours"].includes(hour)) {
-      templateTable[_config_constant__WEBPACK_IMPORTED_MODULE_0__["mappingWeekToArrayIndex"][dayOfWeek]][hour] += valueArr[idx];
+    if (dayOfWeek !== 'Sun' && _config_constant__WEBPACK_IMPORTED_MODULE_1__["hours"].includes(hour)) {
+      templateTable[_config_constant__WEBPACK_IMPORTED_MODULE_1__["mappingWeekToArrayIndex"][dayOfWeek]][hour] += valueArr[idx];
+      keepTrackWeek[_config_constant__WEBPACK_IMPORTED_MODULE_1__["mappingWeekToArrayIndex"][dayOfWeek]][hour] += 1;
     }
   });
-  var numberOfWeeks = Object.keys(totalWeeks).length;
 
   var _loop_1 = function _loop_1(i) {
-    _config_constant__WEBPACK_IMPORTED_MODULE_0__["hours"].map(function (hour) {
+    _config_constant__WEBPACK_IMPORTED_MODULE_1__["hours"].map(function (hour) {
       if (templateTable[i][hour] == 0) {
         templateTable[i][hour] = null;
       } else {
-        if (numberOfWeeks > 1) {
-          templateTable[i][hour] = Math.round(templateTable[i][hour] / numberOfWeeks * 10) / 10;
-        } else {
-          templateTable[i][hour] = Math.round(templateTable[i][hour] * 10) / 10;
-        }
+        templateTable[i][hour] = Math.round(templateTable[i][hour] / keepTrackWeek[i][hour] * 100) / 100; // if (numberOfWeeks > 1) {
+        //   templateTable[i][hour] = Math.round((templateTable[i][hour] / numberOfWeeks) * 10) / 10;
+        // } else {
+        //   templateTable[i][hour] = Math.round(templateTable[i][hour] * 10) / 10;
+        // }
       }
     });
-  };
+  }; // const numberOfWeeks = Object.keys(totalWeeks).length;
+
 
   for (var i = 0; i < 6; i++) {
     _loop_1(i);
