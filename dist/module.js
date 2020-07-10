@@ -39635,8 +39635,6 @@ var processData = function processData(valueArr, timestampArr) {
     }
   });
   var numberOfWeeks = Object.keys(totalWeeks).length;
-  console.log('weeks ', totalWeeks);
-  console.log('template ', templateTable);
 
   var _loop_1 = function _loop_1(i) {
     _config_constant__WEBPACK_IMPORTED_MODULE_0__["hours"].map(function (hour) {
