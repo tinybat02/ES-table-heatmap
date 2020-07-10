@@ -39627,14 +39627,11 @@ var processData = function processData(valueArr, timestampArr) {
 
     keepTrackWeek.push(rest);
     return obj;
-  }); // const totalWeeks: { [key: number]: boolean } = {};
-
+  });
   timestampArr.map(function (timestamp, idx) {
     var date = moment__WEBPACK_IMPORTED_MODULE_2___default()(timestamp);
     var dayOfWeek = date.locale('en').format('ddd');
-    var hour = date.format('HH'); // if (!totalWeeks[date.isoWeek()]) {
-    //   totalWeeks[date.isoWeek()] = true;
-    // }
+    var hour = date.format('HH');
 
     if (dayOfWeek !== 'Sun' && _config_constant__WEBPACK_IMPORTED_MODULE_1__["hours"].includes(hour)) {
       templateTable[_config_constant__WEBPACK_IMPORTED_MODULE_1__["mappingWeekToArrayIndex"][dayOfWeek]][hour] += valueArr[idx];
@@ -39647,15 +39644,10 @@ var processData = function processData(valueArr, timestampArr) {
       if (templateTable[i][hour] == 0) {
         templateTable[i][hour] = null;
       } else {
-        templateTable[i][hour] = Math.round(templateTable[i][hour] / keepTrackWeek[i][hour] * 100) / 100; // if (numberOfWeeks > 1) {
-        //   templateTable[i][hour] = Math.round((templateTable[i][hour] / numberOfWeeks) * 10) / 10;
-        // } else {
-        //   templateTable[i][hour] = Math.round(templateTable[i][hour] * 10) / 10;
-        // }
+        templateTable[i][hour] = Math.round(templateTable[i][hour] / keepTrackWeek[i][hour] * 100) / 100;
       }
     });
-  }; // const numberOfWeeks = Object.keys(totalWeeks).length;
-
+  };
 
   for (var i = 0; i < 6; i++) {
     _loop_1(i);
