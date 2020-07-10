@@ -10,12 +10,15 @@ export const processData = (valueArr: number[], timestampArr: number[]) => {
     });
     return obj;
   });
+  console.log('templateTable ', templateTable);
 
   timestampArr.map((timestamp, idx) => {
     const date = moment(timestamp);
     const dayOfWeek = date.locale('en').format('ddd') as DayOfWeek;
     const hour = date.format('HH');
     if (dayOfWeek !== 'Sun' && hours.includes(hour)) {
+      console.log('dayOfWeek ', dayOfWeek);
+      console.log('match ', mappingWeekToArrayIndex[dayOfWeek]);
       templateTable[mappingWeekToArrayIndex[dayOfWeek]][hour] += valueArr[idx];
     }
   });
