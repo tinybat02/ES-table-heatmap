@@ -39532,16 +39532,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hours", function() { return hours; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "weekdays", function() { return weekdays; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mappingWeekToArrayIndex", function() { return mappingWeekToArrayIndex; });
-var hours = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
-var weekdays = ['Sun', 'Sat', 'Fri', 'Thu', 'Wed', 'Tue', 'Mon'];
+var hours = [// '00',
+// '01',
+// '02',
+// '03',
+// '04',
+// '05',
+// '06',
+// '07',
+// '08',
+'09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'];
+var weekdays = [
+/* 'Sun', */
+'Sat', 'Fri', 'Thu', 'Wed', 'Tue', 'Mon'];
 var mappingWeekToArrayIndex = {
-  Sun: 0,
-  Sat: 1,
-  Fri: 2,
-  Thu: 3,
-  Wed: 4,
-  Tue: 5,
-  Mon: 6
+  // Sun: 0,
+  Sat: 0,
+  Fri: 1,
+  Thu: 2,
+  Wed: 3,
+  Tue: 4,
+  Mon: 5
 };
 
 /***/ }),
@@ -39613,7 +39624,10 @@ var processData = function processData(valueArr, timestampArr) {
     var date = moment__WEBPACK_IMPORTED_MODULE_1___default()(timestamp);
     var dayOfWeek = date.locale('en').format('ddd');
     var hour = date.format('HH');
-    templateTable[_config_constant__WEBPACK_IMPORTED_MODULE_0__["mappingWeekToArrayIndex"][dayOfWeek]][hour] += valueArr[idx];
+
+    if (dayOfWeek !== 'Sun' && _config_constant__WEBPACK_IMPORTED_MODULE_0__["hours"].includes(hour)) {
+      templateTable[_config_constant__WEBPACK_IMPORTED_MODULE_0__["mappingWeekToArrayIndex"][dayOfWeek]][hour] += valueArr[idx];
+    }
   });
 
   var _loop_1 = function _loop_1(i) {

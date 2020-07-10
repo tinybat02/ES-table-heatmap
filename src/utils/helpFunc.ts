@@ -15,7 +15,9 @@ export const processData = (valueArr: number[], timestampArr: number[]) => {
     const date = moment(timestamp);
     const dayOfWeek = date.locale('en').format('ddd') as DayOfWeek;
     const hour = date.format('HH');
-    templateTable[mappingWeekToArrayIndex[dayOfWeek]][hour] += valueArr[idx];
+    if (dayOfWeek !== 'Sun' && hours.includes(hour)) {
+      templateTable[mappingWeekToArrayIndex[dayOfWeek]][hour] += valueArr[idx];
+    }
   });
 
   for (let i = 0; i < 7; i++) {
