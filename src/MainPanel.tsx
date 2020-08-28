@@ -26,6 +26,7 @@ export class MainPanel extends PureComponent<Props> {
       series.reduce((sum, curr) => sum + curr.fields[0].values.buffer[i], 0)
     );
     const timestampArray = series[0].fields[1].values.buffer;
+    console.log('timestamp arr ', timestampArray);
 
     const { data } = processData(valueArray, timestampArray);
     this.setState({ data });

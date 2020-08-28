@@ -39407,6 +39407,7 @@ function (_super) {
       }, 0);
     });
     var timestampArray = series[0].fields[1].values.buffer;
+    console.log('timestamp arr ', timestampArray);
     var data = Object(_utils_helpFunc__WEBPACK_IMPORTED_MODULE_3__["processData"])(valueArray, timestampArray).data;
     this.setState({
       data: data
