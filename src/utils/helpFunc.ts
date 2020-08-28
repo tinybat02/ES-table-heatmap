@@ -1,6 +1,7 @@
 import { hours, weekdays, mappingWeekToArrayIndex } from '../config/constant';
 import { DayObj, DayOfWeek } from '../types';
-import moment from 'moment';
+// import moment from 'moment';
+import moment from 'moment-timezone';
 
 export const processData = (valueArr: number[], timestampArr: number[]) => {
   const keepTrackWeek: Array<{ [key: string]: number }> = [];
@@ -15,7 +16,7 @@ export const processData = (valueArr: number[], timestampArr: number[]) => {
   });
 
   timestampArr.map((timestamp, idx) => {
-    const date = moment(timestamp);
+    const date = moment(timestamp).tz('Europe/Athens');
     const dayOfWeek = date.locale('en').format('ddd') as DayOfWeek;
     const hour = date.format('HH');
 

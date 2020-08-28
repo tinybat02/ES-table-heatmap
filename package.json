@@ -13,10 +13,11 @@
   "devDependencies": {
     "@grafana/data": "next",
     "@grafana/toolkit": "next",
-    "@grafana/ui": "next"
+    "@grafana/ui": "^7.1.5"
   },
   "dependencies": {
     "@nivo/heatmap": "^0.62.0",
-    "moment": "^2.26.0"
+    "moment": "^2.26.0",
+    "moment-timezone": "^0.5.31"
   }
 }
