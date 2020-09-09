@@ -40198,7 +40198,7 @@ function (_super) {
       margin: {
         top: 0,
         right: 0,
-        bottom: 20,
+        bottom: 30,
         left: 10
       },
       forceSquare: true,

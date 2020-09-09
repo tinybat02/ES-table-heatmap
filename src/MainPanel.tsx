@@ -69,7 +69,7 @@ export class MainPanel extends PureComponent<Props> {
           data={data}
           keys={hours}
           indexBy="date"
-          margin={{ top: 0, right: 0, bottom: 20, left: 10 }}
+          margin={{ top: 0, right: 0, bottom: 30, left: 10 }}
           forceSquare={true}
           axisTop={null}
           axisRight={null}
