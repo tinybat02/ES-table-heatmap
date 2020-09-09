@@ -40196,10 +40196,10 @@ function (_super) {
       keys: _config_constant__WEBPACK_IMPORTED_MODULE_4__["hours"],
       indexBy: "date",
       margin: {
-        top: 10,
-        right: 10,
-        bottom: 40,
-        left: 10
+        top: 5,
+        right: 0,
+        bottom: 20,
+        left: 0
       },
       forceSquare: true,
       axisTop: null,
