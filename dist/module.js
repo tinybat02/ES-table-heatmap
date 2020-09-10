@@ -44527,7 +44527,7 @@ var processData = function processData(valueArr, timestampArr) {
 
   var csvData = _config_constant__WEBPACK_IMPORTED_MODULE_1__["hours"].map(function (hour) {
     return {
-      Hour: hour
+      Hour: hour + ":00"
     };
   });
   templateTable.map(function (weekday) {

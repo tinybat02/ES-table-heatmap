@@ -43,7 +43,7 @@ export const processData = (valueArr: number[], timestampArr: number[]) => {
     });
   }
 
-  const csvData: Array<CSVRow> = hours.map(hour => ({ Hour: hour }));
+  const csvData: Array<CSVRow> = hours.map(hour => ({ Hour: `${hour}:00` }));
 
   templateTable.map(weekday => {
     const day = weekday.date as DayOfWeek;
