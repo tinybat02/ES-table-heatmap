@@ -3,6 +3,7 @@ import { DayObj, DayOfWeek } from '../types';
 // import moment from 'moment-timezone';
 import toDate from 'date-fns/toDate';
 import { utcToZonedTime, format } from 'date-fns-tz';
+import { CSVRow } from '../types';
 
 export const processData = (valueArr: number[], timestampArr: number[]) => {
   const keepTrackWeek: Array<{ [key: string]: number }> = [];
@@ -41,5 +42,17 @@ export const processData = (valueArr: number[], timestampArr: number[]) => {
       }
     });
   }
-  return { data: templateTable };
+
+  const csvData: Array<CSVRow> = hours.map(hour => ({ Hour: hour }));
+
+  templateTable.map(weekday => {
+    const day = weekday.date as DayOfWeek;
+    if (day != 'Sun') {
+      hours.map((hour, idx) => {
+        csvData[idx][day] = templateTable[mappingWeekToArrayIndex[day]][hour] || 0;
+      });
+    }
+  });
+
+  return { data: templateTable, csvData };
 };

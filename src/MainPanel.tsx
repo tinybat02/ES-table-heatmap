@@ -1,18 +1,22 @@
 import React, { PureComponent } from 'react';
 import { PanelProps } from '@grafana/data';
-import { PanelOptions, Frame, DayObj } from 'types';
+import { PanelOptions, Frame, DayObj, CSVRow } from 'types';
 import { ResponsiveHeatMap } from '@nivo/heatmap';
 import { processData } from './utils/helpFunc';
 import { hours } from './config/constant';
+import Icon from './img/save_icon.svg';
+import { CSVLink } from 'react-csv';
 
 interface Props extends PanelProps<PanelOptions> {}
 interface State {
   data: Array<DayObj> | null;
+  csvData: Array<CSVRow>;
 }
 
 export class MainPanel extends PureComponent<Props> {
   state: State = {
     data: null,
+    csvData: [],
   };
 
   componentDidMount() {
@@ -26,10 +30,9 @@ export class MainPanel extends PureComponent<Props> {
       series.reduce((sum, curr) => sum + curr.fields[0].values.buffer[i], 0)
     );
     const timestampArray = series[0].fields[1].values.buffer;
-    console.log('timestamp arr ', timestampArray);
 
-    const { data } = processData(valueArray, timestampArray);
-    this.setState({ data });
+    const { data, csvData } = processData(valueArray, timestampArray);
+    this.setState({ data, csvData });
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -37,7 +40,7 @@ export class MainPanel extends PureComponent<Props> {
       const series = this.props.data.series as Frame[];
 
       if (series.length == 0) {
-        this.setState({ data: null });
+        this.setState({ data: null, csvData: [] });
         return;
       }
       const valueArray = series[0].fields[0].values.buffer.map((elm: Frame, i: number) =>
@@ -45,14 +48,14 @@ export class MainPanel extends PureComponent<Props> {
       );
       const timestampArray = series[0].fields[1].values.buffer;
 
-      const { data } = processData(valueArray, timestampArray);
-      this.setState({ data });
+      const { data, csvData } = processData(valueArray, timestampArray);
+      this.setState({ data, csvData });
     }
   }
 
   render() {
     const { width, height } = this.props;
-    const { data } = this.state;
+    const { data, csvData } = this.state;
 
     if (!data) {
       return <div />;
@@ -63,8 +66,17 @@ export class MainPanel extends PureComponent<Props> {
         style={{
           width,
           height,
+          position: 'relative',
         }}
       >
+        <CSVLink
+          headers={['Hour', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
+          data={csvData}
+          filename={`${new Date().toLocaleDateString()}.csv`}
+          style={{ position: 'absolute', top: 0, right: 2, zIndex: 2 }}
+        >
+          <img src={Icon} />
+        </CSVLink>
         <ResponsiveHeatMap
           data={data}
           keys={hours}

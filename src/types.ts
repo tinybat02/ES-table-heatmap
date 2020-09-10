@@ -22,3 +22,14 @@ export interface DayObj {
 }
 
 export type DayOfWeek = 'Sun' | 'Sat' | 'Fri' | 'Thu' | 'Wed' | 'Tue' | 'Mon';
+
+export interface CSVRow {
+  Hour: string;
+  Mon?: number;
+  Tue?: number;
+  Wed?: number;
+  Thu?: number;
+  Fri?: number;
+  Sat?: number;
+  Sun?: number;
+}

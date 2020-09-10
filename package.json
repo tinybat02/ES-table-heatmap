@@ -19,6 +19,7 @@
     "@nivo/heatmap": "^0.62.0",
     "date-fns": "^2.16.1",
     "date-fns-tz": "^1.0.10",
-    "moment-timezone": "^0.5.31"
+    "moment-timezone": "^0.5.31",
+    "react-csv": "^2.0.3"
   }
 }
