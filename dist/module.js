@@ -51162,7 +51162,8 @@ function (_super) {
     _this.handleDownload = function () {
       var filename = _this.props.options.filename;
       var downloadCsv = use_csv_downloader__WEBPACK_IMPORTED_MODULE_6___default()({
-        quote: ''
+        quote: '',
+        delimiter: ';'
       });
       downloadCsv(_this.state.csvData, filename + ".csv");
     };
