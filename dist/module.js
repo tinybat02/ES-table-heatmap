@@ -51483,7 +51483,7 @@ var processData = function processData(valueArr, timestampArr) {
       Hour: hour + ":00"
     };
   });
-  templateTable.map(function (weekday) {
+  templateTable.slice().reverse().map(function (weekday) {
     var day = weekday.date;
 
     if (day != 'Sun') {

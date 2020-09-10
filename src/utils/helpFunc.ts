@@ -45,14 +45,17 @@ export const processData = (valueArr: number[], timestampArr: number[]) => {
 
   const csvData: Array<CSVRow> = hours.map(hour => ({ Hour: `${hour}:00` }));
 
-  templateTable.map(weekday => {
-    const day = weekday.date as DayOfWeek;
-    if (day != 'Sun') {
-      hours.map((hour, idx) => {
-        csvData[idx][day] = templateTable[mappingWeekToArrayIndex[day]][hour] || 0;
-      });
-    }
-  });
+  templateTable
+    .slice()
+    .reverse()
+    .map(weekday => {
+      const day = weekday.date as DayOfWeek;
+      if (day != 'Sun') {
+        hours.map((hour, idx) => {
+          csvData[idx][day] = templateTable[mappingWeekToArrayIndex[day]][hour] || 0;
+        });
+      }
+    });
 
   return { data: templateTable, csvData };
 };
