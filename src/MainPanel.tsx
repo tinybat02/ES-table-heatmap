@@ -5,7 +5,7 @@ import { ResponsiveHeatMap } from '@nivo/heatmap';
 import { processData } from './utils/helpFunc';
 import { hours } from './config/constant';
 import Icon from './img/save_icon.svg';
-import { CSVLink } from 'react-csv';
+import useCsvDownloader from 'use-csv-downloader';
 
 interface Props extends PanelProps<PanelOptions> {}
 interface State {
@@ -53,9 +53,15 @@ export class MainPanel extends PureComponent<Props> {
     }
   }
 
+  handleDownload = () => {
+    const { filename } = this.props.options;
+    const downloadCsv = useCsvDownloader({ quote: '' });
+    downloadCsv(this.state.csvData, `${filename}.csv`);
+  };
+
   render() {
     const { width, height } = this.props;
-    const { data, csvData } = this.state;
+    const { data } = this.state;
 
     if (!data) {
       return <div />;
@@ -69,14 +75,7 @@ export class MainPanel extends PureComponent<Props> {
           position: 'relative',
         }}
       >
-        <CSVLink
-          headers={['Hour', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
-          data={csvData}
-          filename={`${new Date().toLocaleDateString()}.csv`}
-          style={{ position: 'absolute', top: 0, right: 2, zIndex: 2 }}
-        >
-          <img src={Icon} />
-        </CSVLink>
+        <img src={Icon} onClick={this.handleDownload} style={{ position: 'absolute', top: 0, right: 2, zIndex: 2 }} />
         <ResponsiveHeatMap
           data={data}
           keys={hours}

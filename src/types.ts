@@ -1,8 +1,12 @@
 import { DataFrame, Field, Vector } from '@grafana/data';
 
-export interface PanelOptions {}
+export interface PanelOptions {
+  filename: string;
+}
 
-export const defaults: PanelOptions = {};
+export const defaults: PanelOptions = {
+  filename: '',
+};
 
 interface Buffer extends Vector {
   buffer: any;
